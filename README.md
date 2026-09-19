@@ -1,5 +1,7 @@
 # Caesar Cipher Tool
 
+[![Tests](https://github.com/EngagedEntree3/caesar-cipher/actions/workflows/tests.yml/badge.svg)](https://github.com/EngagedEntree3/caesar-cipher/actions/workflows/tests.yml)
+
 A command-line Caesar cipher: encrypt, decrypt, and crack ciphertext when the
 key is unknown. Pure Python standard library — no dependencies, no install step.
 
@@ -144,3 +146,6 @@ subprocess test that runs `main.py` as a real program rather than an import.
 
 `-k` filtering is case-sensitive: a bare word matches test *method* names
 (`-k test_top`), while the glob form matches the full id (`-k '*Crack*'`).
+
+CI runs the suite on Python 3.9 through 3.13 on every push and pull request —
+see `.github/workflows/tests.yml`.
