@@ -1,6 +1,6 @@
 # Caesar Cipher Tool
 
-[![Tests](https://github.com/EngagedEntree3/caesar-cipher/actions/workflows/tests.yml/badge.svg)](https://github.com/EngagedEntree3/caesar-cipher/actions/workflows/tests.yml)
+[![Tests](https://github.com/EngagedEntree3/caesar/actions/workflows/tests.yml/badge.svg)](https://github.com/EngagedEntree3/caesar/actions/workflows/tests.yml)
 
 A command-line Caesar cipher: encrypt, decrypt, and crack ciphertext when the
 key is unknown. Pure Python standard library — no dependencies, no install step.
