@@ -1,0 +1,45 @@
+# Run the test suite on every push and pull request.
+#
+# The tool is pure standard library, so the axis that actually matters is the
+# Python version, not the OS. fail-fast is off so one old interpreter failing
+# still tells us about all the others in the same run.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run test suite
+        run: ./run_tests.sh
+
+      - name: Check the CLI runs as a program
+        run: |
+          test "$(./main.py encrypt 'abc' --shift 3)" = "def"
+          test "$(./main.py decrypt 'def' --shift 3)" = "abc"
+          test "$(./main.py crack 'def' | wc -l)" -eq 25
+          echo "CLI smoke test passed"

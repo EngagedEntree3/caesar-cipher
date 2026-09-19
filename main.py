@@ -18,11 +18,14 @@ is what lets the core be imported and tested without touching argv or stdout.
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from typing import List, Optional, Sequence
 
-# Allow running the script directly from a checkout without installing.
-sys.path.insert(0, __file__.rsplit("/", 1)[0] if "/" in __file__ else ".")
+# Allow running the script directly from a checkout without installing it.
+# os.path rather than string splitting on "/", so this also works on Windows
+# and when invoked through a symlink or a relative path.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from caesar.cipher import Candidate, brute_force, decrypt, encrypt  # noqa: E402
 
